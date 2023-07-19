@@ -8,12 +8,12 @@ pipeline {
 stages{
         stage('Build'){
             steps {
-                command 'maven clean package'
+                bat 'maven clean package'
             }
             post {
                 success {
                     echo 'Archiving the artifacts'
-                    archiveArtifacts artifacts: '**/*/*.war'
+                    archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
         }
