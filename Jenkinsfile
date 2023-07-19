@@ -8,8 +8,15 @@ pipeline {
 stages{
         stage('Build'){
             steps {
-                bat 'mvn clean install'
+                bat 'mvn clean package'
             }
+            post {
+                success {
+                    echo 'Archiving the artifacts'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
 
         stage ('Deployments'){
             steps {
